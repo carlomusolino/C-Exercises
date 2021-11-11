@@ -48,7 +48,7 @@ namespace BattleShip {
         }
     };
     inline int pad_index(const int index);
-    inline int coordinates(const unsigned int i, letter j) { return GRID_SIZE_PADDED*(i + 1) + j; }
+    inline int coordinates(const unsigned int i, letter j) { return pad_index(GRID_SIZE*(i) + j-1); }
     void Grid::place_ship(shiptypes t){
         int length = ship_length[t-1];
         bool done = false;
