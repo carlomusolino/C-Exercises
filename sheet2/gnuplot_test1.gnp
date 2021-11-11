@@ -1,0 +1,14 @@
+set terminal pdf enhanced font 'Verdana,10'
+set output 'out.pdf'
+# Line width of the axes
+set border linewidth 1.5
+# Line styles
+set style line 1 linecolor rgb '#0060ad' linetype 1 linewidth 2
+set style line 2 linecolor rgb '#dd181f' linetype 1 linewidth 2
+f(x) = exp(-1/x)
+g(x) = exp(-x)
+plot f(x) title '{e^{-1/x}}' with lines linestyle 1, \
+     g(x) title '{e^{-x}}' with lines linestyle 2
+set xlabel '{/Helvetica-Oblique x}'
+set ylabel '{/Helvetica-Oblique f(x)}'
+set xrange [0:10]
