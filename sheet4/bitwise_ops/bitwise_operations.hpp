@@ -16,11 +16,9 @@ namespace Bitwise_Operations{
      * and add it to the result. The function achieves this by using recursion 
      */
     int bitwise_add(int n, int m){
-        static int count = -1; // count is static because the function recursively calls itself
-        int sum = n ^ m;
+       int sum = n ^ m;
         int carry = (n & m) << 1 ; // shift the carry left by one ! 
-        count ++ ;
-        if (count < 8 * sizeof(int)) sum = bitwise_add(sum,carry);
+        if (carry) sum = bitwise_add(sum,carry);
         return sum;
     }
     /**

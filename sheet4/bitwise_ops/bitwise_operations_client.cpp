@@ -3,7 +3,7 @@
 using namespace Bitwise_Operations;
 using namespace std;
 int main(){
-    int n = 100;
+    int n = 17;
     int m = 7;
     cout << "n = " << n << "\t" << ", m = " << m << endl;
     cout << "n + m = " << "\t";
