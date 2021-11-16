@@ -3,8 +3,11 @@
 using namespace Bitwise_Operations;
 using namespace std;
 int main(){
-    int n = 4;
-    int m = 2;
+    int n = 100;
+    int m = 7;
+    cout << "n = " << n << "\t" << ", m = " << m << endl;
+    cout << "n + m = " << "\t";
     cout << bitwise_add(n,m) << endl;
+    cout << "n x m = " << "\t";
     cout << bitwise_mult(n,m) << endl;
 }

@@ -14,6 +14,12 @@
 #include<tuple>
 
 namespace Root_Finding{
+    /*
+    * "using" alias-declaration (c++ 11): https://en.cppreference.com/w/cpp/language/type_alias
+    * It's like typedef but you can make it templated for extra style points
+    */
+    template <class T> 
+    using my_func_type=T (*)(T);
     // define some constants
     constexpr long int MAX_ITER = 10000; // max number of iterations for Root finding algorithm
     constexpr double DEFAULT_TOL = 1e-10; // default tolerance
@@ -33,7 +39,7 @@ namespace Root_Finding{
      * Loop up to a maximum of MAX_ITER times looking for the root of the input function func. Returns a std::tuple containing the root and the number of iterations performed.
      * Throws an error if the initial bracketing values are invalid or if convergence to the desired tolerance cannot be achieved.
      */
-    template <typename T> std::tuple<T,unsigned int> root_finding(T (*func)(T),T x_low,T x_hi, const T tol=static_cast<T>(DEFAULT_TOL)){
+    template <typename T> std::tuple<T,unsigned int> root_finding(my_func_type<T> func,T x_low,T x_hi, const T tol=static_cast<T>(DEFAULT_TOL)){
         // pre-requirement assertion
         if((func(x_low) * func(x_hi))>0) 
         {   
@@ -41,7 +47,7 @@ namespace Root_Finding{
             throw(RootFinderError{errmsg});
         }
         T x_m;
-        T err = static_cast<T>(1.);
+        T err = fabs(x_hi-x_low);
         int n_iter = 0;
         while((err>tol)&&(n_iter<MAX_ITER)){
             x_m = 0.5 * (x_hi + x_low);
@@ -50,14 +56,14 @@ namespace Root_Finding{
             } else {
                 x_hi =x_m;
             }
-            err = fabs(func(x_m));
+            err = fabs(x_hi-x_low);
             n_iter++;
         }
         if(err>tol) {
             std::string errmsg = "Exceeded maximum number of iterations.";
             throw(RootFinderError{errmsg});
         }
-        return std::make_tuple(x_m,n_iter);
+        return std::make_tuple(x_m,n_iter); //std::make_tuple returns a tuple initialised from the values, to be compared with std::tie which returns a tuple of references !
     }
 
     /**
@@ -69,7 +75,7 @@ namespace Root_Finding{
      * Loop up to a maximum of MAX_ITER times looking for the root of the input function func. Returns a std::tuple containing the root and the number of iterations performed.
      * Throws an error if the initial bracketing values are invalid or if convergence to the desired tolerance cannot be achieved.
      */
-    template <typename T> std::tuple<T,unsigned int> root_finding_recursive( T (*func)(T),T x_low,T x_hi, const T tol=static_cast<T>(DEFAULT_TOL)){
+    template <typename T> std::tuple<T,unsigned int> root_finding_recursive(my_func_type<T> func,T x_low,T x_hi, const T tol=static_cast<T>(DEFAULT_TOL)){
 
         if((func(x_low) * func(x_hi))>0) 
         {   

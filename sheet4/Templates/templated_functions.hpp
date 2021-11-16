@@ -38,7 +38,7 @@ namespace Templated_Functions {
         }
     }
 
-    // Bonus clip: the C++ way of doing this
+    // Bonus clip: the C++ std::array version
     /**
      * @brief print an std::array of length N, where N is a template parameter.
      * @param arr input array with N elements of type T
