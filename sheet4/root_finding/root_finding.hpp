@@ -28,7 +28,7 @@ namespace Root_Finding{
      */
     struct RootFinderError {
         std::string err;
-        RootFinderError(std::string err_msg) : err(err_msg){ std::cout << err << std::endl;};
+        RootFinderError(std::string err_msg) : err(err_msg){ std::cerr << err << std::endl;};
     };
     /**
      * @brief First version of root_finding algorithm.
